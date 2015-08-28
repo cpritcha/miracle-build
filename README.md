@@ -70,10 +70,10 @@ First, ssh into the `dev1` machine (`vagrant ssh dev1`). Then run the following
 ```bash
 # vagrant@dev1:~$
 # Start the DeployR Server
-sudo run -d -p 7400:7400 deployr
+sudo docker run -d -p 7400:7400 deployr
 
 # Start the Radiant Server
-sudo run -d -p 3838:3838 radiant
+sudo docker run -d -p 3838:3838 radiant
 ```
 
 Now open up your web broswer at `localhost:7400/revolution` and 
