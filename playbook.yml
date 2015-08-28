@@ -5,6 +5,7 @@
       
   roles:
     - ANXS.postgresql
+    - angstwad.docker_ubuntu
 
 - hosts: dev
   sudo: yes
@@ -56,4 +57,10 @@
         virtualenv_command=virtualenv
         requirements=/home/vagrant/miracle/requirements.txt
 
+    - name: ensure deployr docker image is present
+      docker_image: >
+        path="/home/vagrant/deployr-docker" name="deployr" state=present
 
+    - name: ensure radiant docker image is present
+      docker_image: >
+        path="/home/vagrant/radiant-docker" name="radiant" state=present

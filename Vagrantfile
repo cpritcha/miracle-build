@@ -22,10 +22,16 @@ Vagrant.configure(2) do |config|
 	dev_config.vm.box = "ubuntu/trusty64"
 	dev_config.vm.hostname = "dev1"
 	dev_config.vm.network :private_network, ip: "10.0.15.21"
-	dev_config.vm.network :forwarded_port, guest: 8000, host: 8001
+
+	dev_config.vm.network :forwarded_port, guest: 8000, host: 8001  # Django
+	dev_config.vm.network :forwarded_port, guest: 7400, host: 7400  # DeployR
+	dev_config.vm.network :forwarded_port, guest: 3838, host: 3838  # Radiant
+	dev_config.vm.network :forwarded_port, guest: 5432, host: 15432 # PostgreSQL
+
 	dev_config.vm.provider "virtualbox" do |vb|
-		vb.memory = "256"
+		vb.memory = "2048"
 	end
+
 	dev_config.vm.synced_folder ".", "/vagrant", disabled: true
 	dev_config.vm.synced_folder "../miracle", "/home/vagrant/miracle"
 	dev_config.vm.synced_folder "../deployr-docker", "/home/vagrant/deployr-docker"

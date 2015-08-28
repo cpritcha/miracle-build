@@ -59,7 +59,34 @@ cd miracle
 Now open up your web browser at `localhost:8001` and you should see the miracle
 website.
 
+Running the DeployR and Radiant Servers
+---------------------------------------
+
+First, ssh into the `dev1` machine (`vagrant ssh dev1`). Then run the following
+
+```bash
+# vagrant@dev1:~$
+# Start the DeployR Server
+sudo run -d -p 7400:7400 deployr
+
+# Start the Radiant Server
+sudo run -d -p 3838:3838 radiant
+```
+
+Now open up your web broswer at `localhost:7400/revolution` and 
+`localhost:3838` and you should see the DeployR and Radiant respectively
+
 Notes
 -----
 
 Dependencies: `vagrant`
+
+Making the docker images will take a while. To see the output of the docker
+build you could build the images outside the playbook. In order to do that,
+you need to run the following code before the playbook is run
+
+```bash
+# vagrant@dev1:~$
+sudo docker build -t deployr deployr-docker
+sudo docker build -t radiant radiant-docker
+```
