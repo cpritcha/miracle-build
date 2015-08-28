@@ -13,6 +13,9 @@ cd miracle_project
 git clone https://github.com/cpritcha/miracle-build.git build
 cd build
 ./download.sh
+
+# make the directory structure for analyses, could also download data here
+./make_analyses.sh
 ```
 
 Create the virtual machine and ssh in
