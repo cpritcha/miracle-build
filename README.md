@@ -32,7 +32,7 @@ Once inside the `mgmt` node, prepare the `dev1` node
 # vagrant@mgmt:~$ 
 ssh-keyscan dev1 >> .ssh/known_hosts
 cd /vagrant
-ansible-playbook playbook.yml --ask-pass
+ansible-playbook playbook.yml --ask-pass # password: vagrant
 ```
 
 Prepare the `dev1` node by following the installation instructions for the 
