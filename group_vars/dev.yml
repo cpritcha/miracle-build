@@ -1,0 +1,46 @@
+postgresql_version: 9.4
+postgresql_encoding: 'UTF-8'
+postgresql_locale: 'en_US.UTF-8'
+
+postgresql_admin_user: "postgres"
+postgresql_default_auth_method: "trust"
+
+postgresql_cluster_name: "main"
+postgresql_cluster_reset: false
+
+postgresql_max_connections: 2
+postgresql_superuser_reserved_connections: 1
+postgresql_shared_buffers: 32MB
+
+postgresql_databases:
+  - name: miracle_metadata
+  - name: miracle_data
+
+postgresql_users:
+  - name: miracle
+    pass: CHANGEME
+
+postgresql_user_priveleges:
+  - name: miracle
+    role_attr_flags: NOSUPERUSER,NOCREATEDB
+
+#dbname_metadata: miracle_metadata
+#dbname_data: miracle_data
+#dbuser: vagrant
+#dbpassword: aloha
+#
+#  tasks:
+#    - name: ensure metadata database is created
+#      postgresql_db: name={{dbname_metadata}}
+#
+#    - name: ensure data database is created
+#      postgresql_db: name={{dbname_data}}
+#
+#    - name: ensure user has access to metadata database
+#      postgresql_user: db={{dbname_metadata}} name={{dbuser}} password={{dbpassword}} priv=ALL
+#
+#    - name: ensure user has access to data database
+#      postgresql_user: db={{dbname_data}} name={{dbuser}} password={{dbpassword}} priv=ALL
+#
+#    - name: ensure user does not have unnecessary privelege
+#      postgresql_user: name={{dbuser}} role_attr_flags=NOSUPERUSER,NOCREATEDB

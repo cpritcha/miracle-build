@@ -1,0 +1,59 @@
+---
+- hosts: dev
+  sudo: yes
+  gather_facts: yes
+      
+  roles:
+    - ANXS.postgresql
+
+- hosts: dev
+  sudo: yes
+  gather_facts: no
+
+  tasks:
+    - name: ensure ssh public key for mgmt is available
+      authorized_key: 
+        user: vagrant
+        key: "{{ lookup('file', '/home/vagrant/.ssh/id_mgmt.pub') }}"
+        state: present
+
+    - name: ensure cache is up to date
+      apt: update_cache=yes
+
+    - apt: >
+        name=python-psycopg2
+        state=build-dep
+
+    - name: ensure packages are installed
+      apt: name={{item}}
+      with_items:
+        - postgresql-server-dev-9.4
+        - python-gdal
+        - python-psycopg2
+        - python-virtualenv
+        - p7zip-full
+        - npm
+
+    - name: ensure miracle base folder is present
+      file: >
+        path=/opt/miracle
+        state=directory
+
+    - name: ensure miracle child folders are present
+      file: >
+        path="/opt/miracle/{{item}}"
+        state=directory
+      with_items:
+        - apps
+        - data
+        - docs
+        - output
+        - src
+
+    - name: ensure miracle python packages are installed
+      pip: >
+        virtualenv=/home/vagrant/.miracle_env
+        virtualenv_command=virtualenv
+        requirements=/home/vagrant/miracle/requirements.txt
+
+
